@@ -1,0 +1,21 @@
+{
+  "name": "meowdesk",
+  "productName": "MeowDesk",
+  "version": "1.0.0",
+  "description": "A desktop pet cat that lives on your screen, follows your cursor, reacts to typing, and keeps you company while you code.",
+  "main": "src/main/main.js",
+  "author": "MeowDesk",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "build:assets": "python3 tools/build_atlas.py",
+    "dev": "electron . --enable-logging"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1"
+  },
+  "dependencies": {
+    "uiohook-napi": "^1.5.4"
+  }
+}

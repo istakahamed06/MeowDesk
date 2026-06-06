@@ -1,0 +1,23 @@
+/* The window itself is transparent (set in window.js); we just make sure the
+   page background is too and that the canvas fills the whole window. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  /* The cat should feel like part of the desktop, not a clickable web page. */
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+#cat {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* Keep pixel art crisp when scaled up. */
+  image-rendering: pixelated;
+}

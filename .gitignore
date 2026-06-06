@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.log
+
+# Keep the source sprite sheets out of version control if you prefer; the
+# generated atlas under assets/generated/ is what the app actually loads.
+# assets/PACK/
+# assets/Oreo/

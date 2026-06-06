@@ -1,0 +1,13 @@
+Aichan's Asset License :
+Permitted use:
+- You may use these assets for personal and commercial projects
+
+Key restrictions: 
+- You may not sell or redistribute the assets in any form, whether original or modified. 
+- You may not edit, alter, or modify the original files.
+- The assets must not be used in connection with any blockchain- or crypto-related technology or platform, including but not limited to NFTs, play-to-earn games, cryptocurrencies, metaverse projects, or related innovations.
+- The assets may not be used to promote or support blockchain/crypto projects on social media, technical publications (e.g., whitepapers), marketplaces, or similar venues.
+- You may not use the assets to train large language models (LLMs), generative AI, or comparable machine learning systems. 
+
+Note:
+- For any exceptional requests, please contact the rights holder for permission.
