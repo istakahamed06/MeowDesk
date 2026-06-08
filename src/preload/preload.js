@@ -23,4 +23,11 @@ contextBridge.exposeInMainWorld('meow', {
 
   // The user clicked the cat — let the brain react (a happy hop).
   poke: () => ipcRenderer.send('meow:poke'),
+
+  // Right-click / two-finger click on the cat -> native context menu.
+  contextMenu: () => ipcRenderer.send('meow:context-menu'),
+
+  // Drag ("pick up the cat"): the brain pins it to the cursor between these.
+  startDrag: () => ipcRenderer.send('meow:start-drag'),
+  endDrag: () => ipcRenderer.send('meow:end-drag'),
 });

@@ -1,0 +1,98 @@
+/* Dark settings form, sized for the 400x320 config window. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #15151f;
+  color: #e8e8f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 12px;
+}
+body {
+  box-sizing: border-box;
+  padding: 14px 16px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+h1 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 12px 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 9px;
+  color: #a9a9bd;
+  font-size: 11px;
+}
+
+input,
+select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 4px;
+  background: #0f0f17;
+  border: 1px solid #2a2a3a;
+  color: #e8e8f0;
+  border-radius: 7px;
+  padding: 7px 9px;
+  font-size: 12px;
+  outline: none;
+}
+input::placeholder {
+  color: #55556a;
+}
+input:focus,
+select:focus {
+  border-color: #5b6cff;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+.btn {
+  flex: 1;
+  cursor: pointer;
+  border: 1px solid #2a2a3a;
+  background: #1d1d2b;
+  color: #e8e8f0;
+  border-radius: 7px;
+  padding: 8px;
+  font-size: 12px;
+}
+.btn:hover {
+  background: #262638;
+}
+.btn.primary {
+  background: #4655e6;
+  border-color: #4655e6;
+  color: #fff;
+}
+.btn.primary:hover {
+  background: #5663f0;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.status {
+  margin-top: 10px;
+  min-height: 16px;
+  font-size: 11px;
+  color: #9a9aae;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.status.ok {
+  color: #5fd38a;
+}
+.status.err {
+  color: #ff7a7a;
+}

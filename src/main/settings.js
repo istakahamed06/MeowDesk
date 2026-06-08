@@ -7,8 +7,10 @@
 
 const fs = require('fs');
 const path = require('path');
-const { app } = require('electron');
+const { app, safeStorage } = require('electron');
 const { DEFAULTS } = require('./config');
+
+const ENC_PREFIX = 'enc:'; // marks a value encrypted with the OS keychain
 
 let cache = null;
 
@@ -40,4 +42,31 @@ function set(key, value) {
   }
 }
 
-module.exports = { get, set };
+// Store a sensitive string (the API key) encrypted with Electron's safeStorage
+// when the OS keychain is available, so it isn't sitting in plaintext in the
+// settings JSON. Falls back to plaintext if encryption isn't available.
+function setSecret(key, value) {
+  let stored = value || '';
+  try {
+    if (value && safeStorage && safeStorage.isEncryptionAvailable()) {
+      stored = ENC_PREFIX + safeStorage.encryptString(value).toString('base64');
+    }
+  } catch {
+    stored = value || ''; // fall back to plaintext on any keychain hiccup
+  }
+  set(key, stored);
+}
+
+function getSecret(key) {
+  const raw = get(key);
+  if (typeof raw === 'string' && raw.startsWith(ENC_PREFIX)) {
+    try {
+      return safeStorage.decryptString(Buffer.from(raw.slice(ENC_PREFIX.length), 'base64'));
+    } catch {
+      return ''; // unreadable (e.g. different machine/keychain) -> treat as unset
+    }
+  }
+  return raw || '';
+}
+
+module.exports = { get, set, getSecret, setSecret };

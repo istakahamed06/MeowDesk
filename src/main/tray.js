@@ -19,7 +19,7 @@ const CAT_CHOICES = [
   ['oreo', 'Oreo'],
 ];
 
-function createTray({ brain, reminders, onQuit }) {
+function createTray({ brain, reminders, aiAssistant, openConfig, onQuit }) {
   const icon = nativeImage.createFromPath(path.join(ASSETS_DIR, 'tray.png'));
   const tray = new Tray(icon);
   tray.setToolTip('MeowDesk');
@@ -70,12 +70,32 @@ function createTray({ brain, reminders, onQuit }) {
       },
     ];
 
+    // "Ask MeowDesk" AI assistant: off by default; the submenu label is the
+    // header, then the enable toggle, how to configure, and a status line.
+    const aiEnabled = !!settings.get('aiEnabled');
+    const aiConfigured = !!(aiAssistant && aiAssistant.isConfigured());
+    const aiItems = [
+      {
+        label: 'Enable Ask MeowDesk  (⌘⇧A)',
+        type: 'checkbox',
+        checked: aiEnabled,
+        click: () => {
+          settings.set('aiEnabled', !aiEnabled);
+          build();
+        },
+      },
+      { type: 'separator' },
+      { label: 'Configure API…', click: () => openConfig && openConfig() },
+      { label: aiConfigured ? '  ✓ Connected' : '  ✗ Not configured', enabled: false },
+    ];
+
     const menu = Menu.buildFromTemplate([
       { label: 'MeowDesk', enabled: false },
       { type: 'separator' },
       { label: 'Cat Color', submenu: colorItems },
       { label: 'Stretch Reminder', submenu: stretchItems },
       { label: 'Pomodoro', submenu: pomodoroItems },
+      { label: 'AI Assistant', submenu: aiItems },
       { type: 'separator' },
       { label: 'Quit MeowDesk', click: () => onQuit() },
     ]);
@@ -84,7 +104,13 @@ function createTray({ brain, reminders, onQuit }) {
   }
 
   build();
-  return { tray, rebuild: build };
+
+  // v4: reflect the cat's "Freeze here" state in the menu-bar tooltip.
+  function setFrozen(on) {
+    tray.setToolTip(on ? 'MeowDesk ❄️' : 'MeowDesk');
+  }
+
+  return { tray, rebuild: build, setFrozen };
 }
 
 module.exports = { createTray };

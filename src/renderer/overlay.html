@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src data:;"
+    />
+    <link rel="stylesheet" href="overlay.css" />
+  </head>
+  <body>
+    <div id="panel" class="panel">
+      <div id="bar" class="bar">
+        <span class="paw">🐾</span>
+        <span class="brand">MeowDesk</span>
+        <span class="spacer"></span>
+        <button id="close" class="close" title="Close (Cmd+Shift+A)">✕</button>
+      </div>
+      <div id="content" class="content"></div>
+    </div>
+    <script src="overlay.js"></script>
+  </body>
+</html>

@@ -34,10 +34,18 @@ function startInput(brain) {
     brain.noteKeystroke(keysPerSec);
   }
 
+  // Global mouse release: a robust safety net that ends a cat-drag even if the
+  // cursor briefly outran the (small) window so the renderer missed the mouseup.
+  // endDrag() is idempotent, so firing on every release anywhere is harmless.
+  function onMouseUp() {
+    brain.endDrag();
+  }
+
   try {
     uIOhook.on('keydown', onKeyDown);
+    uIOhook.on('mouseup', onMouseUp);
     uIOhook.start();
-    console.log('[input] global keyboard hook started');
+    console.log('[input] global keyboard + mouse hook started');
   } catch (err) {
     console.warn('[input] failed to start uiohook:', err.message);
     return { stop() {} };
